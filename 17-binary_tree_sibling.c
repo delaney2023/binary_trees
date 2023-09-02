@@ -1,15 +1,18 @@
 #include "binary_trees.h"
-#include <stdlib.h>
+
 /**
- * binary_tree_inorder - goes through a binary tree using in-order traversal
- * @tree: binary tree
- * @func: function to be applied to each node's value
+ * binary_tree_sibling - Finds the sibling of a
+ *                       node in a binary tree.
+ * @node: A pointer to the node to find the sibling of.
+ *
+ * Return: If node is NULL or there is no sibling - NULL.
+ *         Otherwise - a pointer to the sibling.
  */
-void binary_tree_inorder(const binary_tree_t *tree, void (*func)(int))
+binary_tree_t *binary_tree_sibling(binary_tree_t *node)
 {
-	if (!tree || !func)
-		return;
-	binary_tree_inorder(tree->left, func);
-	func(tree->n);
-	binary_tree_inorder(tree->right, func);
+	if (node == NULL || node->parent == NULL)
+		return (NULL);
+	if (node->parent->left == node)
+		return (node->parent->right);
+	return (node->parent->left);
 }
